@@ -1,10 +1,204 @@
 @import "tailwindcss";
 
 @layer base {
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans JP", sans-serif;
-    overflow-x: hidden;
+  :root {
+    color-scheme: dark;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Inter", "Avenir Next", "Noto Sans JP", "Yu Gothic UI", system-ui, sans-serif;
+    overflow-x: hidden;
+    background: #090712;
+    font-feature-settings: "palt" 1;
+    letter-spacing: 0.015em;
+  }
+
+  button,
+  input {
+    font: inherit;
+  }
+
+  button:focus-visible,
+  input:focus-visible {
+    outline: 2px solid #67e8f9;
+    outline-offset: 3px;
+  }
+}
+
+.site-shell {
+  isolation: isolate;
+  background-image:
+    radial-gradient(circle at 15% 8%, rgba(124, 58, 237, 0.17), transparent 31rem),
+    radial-gradient(circle at 88% 28%, rgba(236, 72, 153, 0.12), transparent 34rem),
+    linear-gradient(180deg, #090712 0%, #0c0b19 44%, #070812 100%);
+}
+
+.site-shell::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+  opacity: 0.22;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+}
+
+.site-header {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.22);
+}
+
+.site-header nav button {
+  position: relative;
+  padding-block: 0.55rem;
+}
+
+.site-header nav button::after {
+  position: absolute;
+  right: 50%;
+  bottom: 0;
+  left: 50%;
+  height: 2px;
+  content: "";
+  border-radius: 999px;
+  background: linear-gradient(90deg, #8b5cf6, #ec4899);
+  transition: right 180ms ease, left 180ms ease;
+}
+
+.site-header nav button:hover::after {
+  right: 0;
+  left: 0;
+}
+
+.hero-stage {
+  border: 1px solid rgba(192, 132, 252, 0.22);
+  background:
+    radial-gradient(circle at 50% 18%, rgba(168, 85, 247, 0.3), transparent 34%),
+    linear-gradient(145deg, rgba(22, 16, 48, 0.96), rgba(9, 8, 22, 0.98) 58%, rgba(27, 10, 35, 0.95));
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.4), inset 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.hero-stage::after {
+  position: absolute;
+  right: 8%;
+  bottom: -2px;
+  left: 8%;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, #a855f7, #ec4899, transparent);
+  box-shadow: 0 0 22px #d946ef;
+}
+
+.hero-grid {
+  opacity: 0.28;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
+
+.hero-orbit {
+  position: absolute;
+  border: 1px solid rgba(216, 180, 254, 0.13);
+  border-radius: 50%;
+}
+
+.hero-orbit-one {
+  width: 31rem;
+  height: 31rem;
+  top: -18rem;
+  right: -8rem;
+}
+
+.hero-orbit-two {
+  width: 23rem;
+  height: 23rem;
+  bottom: -15rem;
+  left: -4rem;
+}
+
+.hero-title {
+  text-wrap: balance;
+  line-height: 0.92;
+  filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.22));
+}
+
+.hero-title > span:last-child {
+  font-size: 0.7em;
+  letter-spacing: 0.34em;
+  transform: translateX(0.17em);
+}
+
+.hero-copy {
+  text-wrap: balance;
+}
+
+.page-stack > section:not(#cover) {
+  position: relative;
+}
+
+.page-stack > section:not(#cover)::before {
+  position: absolute;
+  top: -2.5rem;
+  left: 50%;
+  width: min(72vw, 36rem);
+  height: 1px;
+  content: "";
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.32), transparent);
+}
+
+.page-stack section h2 {
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.page-stack section h3,
+.page-stack section h4 {
+  text-wrap: balance;
+}
+
+.page-stack section [class*="rounded-2xl"],
+.page-stack section [class*="rounded-3xl"] {
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.04), 0 18px 50px rgba(0, 0, 0, 0.14);
+}
+
+.page-stack section [class*="transition-all"],
+.page-stack section [class*="transition-transform"] {
+  transition-duration: 220ms;
+}
+
+.page-stack table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.page-stack tbody tr {
+  transition: background-color 160ms ease;
+}
+
+.page-stack input[type="range"] {
+  height: 5px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.text-gradient {
+  background: linear-gradient(115deg, #c4b5fd 0%, #f0abfc 38%, #fb7185 66%, #67e8f9 100%);
+  background-size: 180% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: spectrum 8s ease-in-out infinite alternate;
+}
+
+@keyframes spectrum {
+  to { background-position: 100% center; }
 }
 
 /* Glassmorphic utilities */
@@ -31,12 +225,6 @@
 }
 
 /* Gradient animations */
-.text-gradient {
-  background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #3b82f6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 .text-gradient-cyan {
   background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%);
   -webkit-background-clip: text;
@@ -57,6 +245,36 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(168, 85, 247, 0.7);
+}
+
+@media (max-width: 640px) {
+  .site-header > div {
+    height: 4.5rem;
+  }
+
+  .hero-title > span:last-child {
+    letter-spacing: 0.2em;
+    transform: translateX(0.1em);
+  }
+
+  .page-stack {
+    padding-inline: 1rem;
+  }
+
+  .page-stack section [class*="p-8"] {
+    padding: 1.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Print Styles */

@@ -67,7 +67,7 @@ export default function App() {
   const isDark = theme === 'dark';
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${
+    <div className={`site-shell min-h-screen transition-colors duration-300 ${
       isDark ? 'bg-[#0b0819] text-slate-100' : 'bg-slate-50 text-slate-800'
     }`}>
       {/* Dynamic Background Effects for Dark Theme */}
@@ -80,7 +80,7 @@ export default function App() {
       )}
 
       {/* Top Fixed Header / Navigation */}
-      <header className={`sticky top-0 z-50 backdrop-blur-md transition-colors border-b ${
+      <header className={`site-header sticky top-0 z-50 backdrop-blur-md transition-colors border-b ${
         isDark 
           ? 'bg-[#0b0819]/80 border-purple-900/40 text-slate-200' 
           : 'bg-white/80 border-slate-200 text-slate-700'
@@ -398,22 +398,25 @@ export default function App() {
 
         {/* SCROLL LP MODE (STANDARD HIGH IMPACT VIEW) */}
         {viewMode === 'scroll' && (
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+          <div className="page-stack max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-20">
 
             {/* SECTION 1: COVER / HERO */}
-            <section id="cover" className="relative py-12 md:py-20 text-center rounded-3xl overflow-hidden print-page">
+            <section id="cover" className="hero-stage relative py-16 md:py-24 text-center rounded-[2rem] overflow-hidden print-page">
+              <div className="hero-grid absolute inset-0" aria-hidden="true"></div>
+              <div className="hero-orbit hero-orbit-one" aria-hidden="true"></div>
+              <div className="hero-orbit hero-orbit-two" aria-hidden="true"></div>
               <div className="relative z-10 max-w-4xl mx-auto px-4">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/40 bg-purple-500/10 text-purple-300 text-xs sm:text-sm font-semibold tracking-wider uppercase mb-6 shadow-inner">
                   <Sparkles className="w-4 h-4 text-pink-400 animate-pulse" />
                   NEW AUDITION PROJECT 2026
                 </div>
 
-                <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight mb-6">
+                <h1 className="hero-title text-5xl sm:text-7xl md:text-8xl font-black tracking-tight mb-6">
                   <span className="block text-gradient">AI × VOICE</span>
                   <span className="block text-slate-100 dark:text-white mt-1">PROJECT</span>
                 </h1>
 
-                <p className="text-lg sm:text-2xl font-medium tracking-wide text-purple-200/90 mb-10">
+                <p className="hero-copy text-lg sm:text-2xl font-medium tracking-wide text-purple-200/90 mb-10">
                   〜 AIが生んだ楽曲に、本物の声を乗せる 〜
                 </p>
 
@@ -449,12 +452,12 @@ export default function App() {
                       </div>
                       <div>
                         <div className="text-xs opacity-70">シンガー・CD制作統括</div>
-                        <div className="font-bold text-lg text-pink-300">
-                          小坂さん
+                         <div className="font-bold text-lg text-pink-300">
+                           小坂さん・面谷さん
                         </div>
                       </div>
                     </div>
-                    <p className="text-xs opacity-80 pl-12">オーディション・CD制作資金</p>
+                    <p className="text-xs opacity-80 pl-12">シンガーオーディション・CD制作</p>
                   </div>
                 </div>
 
