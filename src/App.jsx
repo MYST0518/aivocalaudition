@@ -20,7 +20,6 @@ import {
   Presentation,
   CheckCircle2,
   FileText,
-  Megaphone,
   Scale,
   Building2,
   ArrowRight,
@@ -39,12 +38,10 @@ export default function App() {
   const [buyoutCount, setBuyoutCount] = useState(1);
   const [buyoutFee, setBuyoutFee] = useState(10000);
 
-  const [singerCount, setSingerCount] = useState(10);
-  const [singerFee, setSingerFee] = useState(10000);
+  const [singerCount, setSingerCount] = useState(20);
+  const [singerFee, setSingerFee] = useState(5000);
 
   const [cdCost, setCdCost] = useState(80000);
-  const [promoCost, setPromoCost] = useState(30000);
-  const [operationCost, setOperationCost] = useState(20000);
 
   // Calculated values
   const creatorRevenue = songCount * songFee;
@@ -52,7 +49,7 @@ export default function App() {
   const creatorBalance = creatorRevenue - creatorExpense;
 
   const kosakaRevenue = singerCount * singerFee;
-  const kosakaExpense = cdCost + promoCost + operationCost;
+  const kosakaExpense = cdCost;
   const kosakaBalance = kosakaRevenue - kosakaExpense;
 
   const slidesCount = 7;
@@ -256,7 +253,7 @@ export default function App() {
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold">収支シミュレーター (リアルタイム試算)</h2>
-                  <p className="text-sm opacity-70">応募数や単価を変更して、miya & Humal・小坂さん 両サイドの予測利益を試算できます</p>
+                  <p className="text-sm opacity-70">応募数や単価を変更して、AI音楽クリエイター・シンガーオーディション両サイドの予測利益を試算できます</p>
                 </div>
               </div>
 
@@ -268,7 +265,7 @@ export default function App() {
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <span className="font-bold text-lg flex items-center gap-2 text-purple-400">
-                        <Music className="w-5 h-5" /> miya & Humal サイド（AI楽曲統括）
+                        <Music className="w-5 h-5" /> AI音楽クリエイターサイド
                       </span>
                       <span className="text-xs font-mono text-purple-300">@miya_SUEMYST / @whisky_tail</span>
                     </div>
@@ -335,9 +332,9 @@ export default function App() {
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <span className="font-bold text-lg flex items-center gap-2 text-pink-400">
-                        <Mic className="w-5 h-5" /> 小坂さん サイド（シンガー・CD制作統括）
+                        <Mic className="w-5 h-5" /> シンガーオーディションサイド
                       </span>
-                      <span className="text-xs text-pink-300">オーディション・CD制作資金</span>
+                      <span className="text-xs text-pink-300">小坂さん・面谷さん／オーディション・CD制作</span>
                     </div>
                     <span className={`text-xl font-extrabold px-3 py-1 rounded-xl ${
                       kosakaBalance >= 0 ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'
@@ -353,7 +350,7 @@ export default function App() {
                         <span>収入: +{(singerCount * singerFee).toLocaleString()}円</span>
                       </div>
                       <input
-                        type="range" min="5" max="30" step="1" value={singerCount}
+                        type="range" min="5" max="50" step="1" value={singerCount}
                         onChange={e => setSingerCount(Number(e.target.value))}
                         className="w-full accent-pink-500"
                       />
@@ -361,10 +358,10 @@ export default function App() {
 
                     <div>
                       <div className="flex justify-between mb-1">
-                        <span>1名あたりオーディションフィー: <strong className="text-pink-300">{singerFee.toLocaleString()} 円</strong></span>
+                        <span>1名あたりエントリーフィー: <strong className="text-pink-300">{singerFee.toLocaleString()} 円</strong></span>
                       </div>
                       <input
-                        type="range" min="5000" max="30000" step="1000" value={singerFee}
+                        type="range" min="1000" max="30000" step="1000" value={singerFee}
                         onChange={e => setSingerFee(Number(e.target.value))}
                         className="w-full accent-pink-500"
                       />
@@ -381,27 +378,6 @@ export default function App() {
                       />
                     </div>
 
-                    <div>
-                      <div className="flex justify-between mb-1">
-                        <span>プロモーション・広告費: <strong className="text-pink-300">{promoCost.toLocaleString()} 円</strong></span>
-                      </div>
-                      <input
-                        type="range" min="10000" max="100000" step="5000" value={promoCost}
-                        onChange={e => setPromoCost(Number(e.target.value))}
-                        className="w-full accent-pink-500"
-                      />
-                    </div>
-
-                    <div>
-                      <div className="flex justify-between mb-1">
-                        <span>運営費・審査費用: <strong className="text-pink-300">{operationCost.toLocaleString()} 円</strong></span>
-                      </div>
-                      <input
-                        type="range" min="0" max="50000" step="5000" value={operationCost}
-                        onChange={e => setOperationCost(Number(e.target.value))}
-                        className="w-full accent-pink-500"
-                      />
-                    </div>
                   </div>
                 </div>
               </div>
@@ -410,7 +386,7 @@ export default function App() {
               <div className="mt-8 p-6 rounded-2xl bg-gradient-to-r from-purple-900/30 via-indigo-900/30 to-pink-900/30 border border-purple-500/30 flex flex-col md:flex-row justify-between items-center gap-4">
                 <div>
                   <div className="font-bold text-lg">プロジェクト全体合計収支</div>
-                  <div className="text-xs opacity-75">（miya & Humal × 小坂さん）企画全体の予想損益バランス</div>
+                  <div className="text-xs opacity-75">（AI音楽クリエイター × シンガーオーディション）企画全体の予想損益バランス</div>
                 </div>
                 <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
                   ≒ {(creatorBalance + kosakaBalance) >= 0 ? `+${(creatorBalance + kosakaBalance).toLocaleString()}` : (creatorBalance + kosakaBalance).toLocaleString()} 円
@@ -539,7 +515,7 @@ export default function App() {
                       </li>
                       <li className="flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-purple-400 shrink-0" />
-                        エントリーフィーの回収
+                        AI音楽エントリーフィーの管理運営
                       </li>
                     </ul>
                   </div>
@@ -556,7 +532,7 @@ export default function App() {
                       <Mic className="w-6 h-6" />
                     </div>
                     <div className="text-xs font-bold text-pink-400 tracking-wider">シンガーオーディション統括</div>
-                    <h4 className="text-2xl font-black mt-1 mb-4">小坂さん</h4>
+                    <h4 className="text-2xl font-black mt-1 mb-4">小坂さん・面谷さん</h4>
                     <ul className="space-y-2 text-sm opacity-80">
                       <li className="flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-pink-400 shrink-0" />
@@ -564,7 +540,7 @@ export default function App() {
                       </li>
                       <li className="flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-pink-400 shrink-0" />
-                        オーディション運営・フィー回収
+                        シンガーオーディションエントリーフィー管理運営
                       </li>
                     </ul>
                   </div>
@@ -580,21 +556,21 @@ export default function App() {
                     <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-4 border border-emerald-500/30">
                       <Disc className="w-6 h-6" />
                     </div>
-                    <div className="text-xs font-bold text-emerald-400 tracking-wider">CD制作資金スポンサー</div>
+                    <div className="text-xs font-bold text-emerald-400 tracking-wider">レーベル代表・CD制作統括</div>
                     <h4 className="text-2xl font-black mt-1 mb-4">小坂さん</h4>
                     <ul className="space-y-2 text-sm opacity-80">
                       <li className="flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                        レコーディング費用の負担
+                        全体統括
                       </li>
                       <li className="flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                        CD制作・リリース費用の負担
+                        CD制作
                       </li>
                     </ul>
                   </div>
                   <div className="mt-6 pt-4 border-t border-emerald-900/20 text-xs text-emerald-300 font-semibold">
-                    担当: プロデュース・資金提供
+                    担当: 全体統括、CD制作
                   </div>
                 </div>
               </div>
@@ -635,10 +611,10 @@ export default function App() {
                 <ProcessStepCard
                   step="03"
                   title="シンガー オーディション"
-                  tag="10名募集"
+                  tag="20名募集"
                   tagColor="bg-pink-500/20 text-pink-300 border-pink-500/40"
-                  owner="小坂さん 担当"
-                  desc="オーディションフィー 10,000円/名。選定楽曲から1曲選んで歌唱音源を提出"
+                  owner="小坂さん・面谷さん 担当"
+                  desc="エントリーフィー 5,000円/名。選定楽曲から1曲選んで歌唱音源を提出"
                   icon={<Mic className="w-5 h-5 text-pink-400" />}
                   isDark={isDark}
                 />
@@ -752,7 +728,7 @@ export default function App() {
                 }`}>
                   <div>
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-pink-500/20 text-pink-300 text-xs font-bold mb-4 border border-pink-500/30">
-                      PART 2 — 小坂さん 担当
+                      PART 2 — 小坂さん・面谷さん 担当
                     </div>
                     <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                       <Mic className="w-7 h-7 text-pink-400" /> シンガー オーディション 募集要項
@@ -762,11 +738,11 @@ export default function App() {
                       <tbody className="divide-y divide-pink-900/20">
                         <tr>
                           <td className="py-3 font-semibold opacity-70 w-1/3">募集人数</td>
-                          <td className="py-3 font-bold text-pink-300">10名 (書類審査通過者)</td>
+                          <td className="py-3 font-bold text-pink-300">20名</td>
                         </tr>
                         <tr>
-                          <td className="py-3 font-semibold opacity-70">オーディションフィー</td>
-                          <td className="py-3 font-bold text-emerald-400">10,000円 / 1名</td>
+                          <td className="py-3 font-semibold opacity-70">エントリーフィー</td>
+                          <td className="py-3 font-bold text-emerald-400">5,000円 / 1名</td>
                         </tr>
                         <tr>
                           <td className="py-3 font-semibold opacity-70">応募資格</td>
@@ -778,7 +754,7 @@ export default function App() {
                         </tr>
                         <tr>
                           <td className="py-3 font-semibold opacity-70">窓口担当</td>
-                          <td className="py-3 font-bold text-pink-300">小坂さん</td>
+                          <td className="py-3 font-bold text-pink-300">小坂さん・面谷さん</td>
                         </tr>
                       </tbody>
                     </table>
@@ -824,7 +800,7 @@ export default function App() {
                         <Music className="w-6 h-6" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-purple-300">miya & Humal サイド</h3>
+                        <h3 className="text-xl font-bold text-purple-300">AI音楽クリエイターサイド</h3>
                         <p className="text-xs font-mono text-purple-400">@miya_SUEMYST / @whisky_tail</p>
                       </div>
                     </div>
@@ -857,19 +833,19 @@ export default function App() {
                         <Mic className="w-6 h-6" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-pink-300">小坂さん サイド</h3>
-                        <p className="text-xs opacity-70">シンガー・CD制作管理</p>
+                        <h3 className="text-xl font-bold text-pink-300">シンガーオーディションサイド</h3>
+                        <p className="text-xs opacity-70">小坂さん・面谷さん／シンガー・CD制作管理</p>
                       </div>
                     </div>
                     <div className="text-right">
                       <div className="text-xs opacity-70">概算収支</div>
-                      <div className="text-2xl font-black text-rose-400">≒ -30,000円〜</div>
+                      <div className="text-2xl font-black text-emerald-400">≒ +20,000円〜</div>
                     </div>
                   </div>
 
                   <div className="space-y-3 text-sm">
                     <div className="flex justify-between items-center p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-                      <span>オーディションフィー収入 (10名 × 10,000円)</span>
+                      <span>エントリーフィー収入 (20名 × 5,000円)</span>
                       <span className="font-bold text-emerald-400">+100,000円</span>
                     </div>
 
@@ -878,15 +854,6 @@ export default function App() {
                       <span className="font-semibold text-rose-400">-80,000円〜</span>
                     </div>
 
-                    <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-800/40 border border-slate-700/40">
-                      <span className="opacity-80">プロモーション・広告費</span>
-                      <span className="font-semibold text-rose-400">-30,000円〜</span>
-                    </div>
-
-                    <div className="flex justify-between items-center p-2.5 rounded-xl bg-slate-800/40 border border-slate-700/40">
-                      <span className="opacity-80">運営費・審査費用</span>
-                      <span className="font-semibold text-rose-400">-20,000円〜</span>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -896,7 +863,7 @@ export default function App() {
                 <Info className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-amber-400 font-bold block mb-1 text-base">収支に関する補足事項</strong>
-                  上記は概算です。CDの制作枚数・流通方法・プロモーション規模によって変動します。
+                  上記は概算です。CDの制作枚数・流通方法によって変動します。
                   <strong>CD販売収益・配信収益の分配</strong>については、miya・Humal・小坂さん間で別途協議のうえ決定してください。
                 </div>
               </div>
@@ -950,10 +917,10 @@ export default function App() {
                     <tr className="hover:bg-cyan-500/5 transition-colors">
                       <td className="py-4 px-4 font-semibold flex items-center gap-2">
                         <span className="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
-                        シンガー エントリー受付
+                        シンガーエントリー受付
                       </td>
-                      <td className="py-4 px-4 font-mono">2026年10月〜11月 (約2ヶ月)</td>
-                      <td className="py-4 px-4"><span className="px-2.5 py-1 rounded-full bg-pink-900/40 text-pink-300 text-xs border border-pink-500/30">小坂さん</span></td>
+                      <td className="py-4 px-4 font-mono">受付期間：2026年8月〜11月</td>
+                      <td className="py-4 px-4"><span className="px-2.5 py-1 rounded-full bg-pink-900/40 text-pink-300 text-xs border border-pink-500/30">小坂さん・面谷さん</span></td>
                     </tr>
                     <tr className="hover:bg-cyan-500/5 transition-colors">
                       <td className="py-4 px-4 font-semibold flex items-center gap-2">
@@ -985,31 +952,8 @@ export default function App() {
             </section>
 
 
-            {/* SECTION 7: PROMOTION & TERMS */}
+            {/* SECTION 7: TERMS */}
             <section id="terms" className="scroll-mt-24 space-y-8">
-              {/* Promotion */}
-              <div className={`p-8 rounded-3xl border ${
-                isDark ? 'bg-slate-900/80 border-purple-900/40' : 'bg-white border-slate-200 shadow-xl'
-              }`}>
-                <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-purple-300">
-                  <Megaphone className="w-5 h-5 text-purple-400" /> 告知・プロモーション戦略 (案)
-                </h3>
-                <ul className="space-y-3 text-sm opacity-90">
-                  <li className="flex items-start gap-3">
-                    <span className="p-1 rounded bg-purple-500/20 text-purple-400 shrink-0 mt-0.5">▶</span>
-                    <span><strong>SNS（Instagram / X / TikTok）にて企画を広告配信。</strong> 参加クリエイター・シンガーによる拡散でムーブメント創出</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="p-1 rounded bg-purple-500/20 text-purple-400 shrink-0 mt-0.5">▶</span>
-                    <span><strong>音楽系YouTuber・インフルエンサーへのタイアップ依頼</strong></span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="p-1 rounded bg-purple-500/20 text-purple-400 shrink-0 mt-0.5">▶</span>
-                    <span><strong>Spotify / Apple Music など</strong> 音楽配信プラットフォームへのCD楽曲登録</span>
-                  </li>
-                </ul>
-              </div>
-
               {/* Terms */}
               <div className={`p-8 rounded-3xl border ${
                 isDark ? 'bg-slate-900/80 border-slate-800' : 'bg-white border-slate-200 shadow-xl'
@@ -1022,15 +966,17 @@ export default function App() {
                   <AlertTriangle className="w-5 h-5 text-rose-400 shrink-0" />
                   <div>
                     <strong className="block text-rose-400 mb-0.5">重要：エントリーフィーは原則返金不可</strong>
-                    楽曲エントリーフィー（1,000円）・シンガーオーディションフィー（10,000円）は、いかなる理由においても原則として返金いたしません。
+                    楽曲エントリーフィー（1,000円）・シンガーオーディションエントリーフィー（5,000円）は、いかなる理由においても原則として返金いたしません。
                   </div>
                 </div>
 
                 <ol className="space-y-3 text-sm opacity-90 list-decimal pl-5">
                   <li>エントリー楽曲は商用利用可能なAI生成楽曲に限ります</li>
-                  <li>楽曲の著作権・使用権については、買取時にmiyaを通じて共同主催者（miya・Humal・小坂さん）へ移転するものとします</li>
-                  <li>シンガーのオーディション音源の著作隣接権は共同主催者に帰属するものとします</li>
-                  <li>CD販売・配信収益の分配については、miya・Humal・小坂さん 間で別途書面にて合意するものとします</li>
+                  <li>AIクリエイターは、応募楽曲の著作権を保有します</li>
+                  <li>レーベル（LAZOS）は、制作された音源の原盤権を保有します</li>
+                  <li>演奏家は、実演家の権利を保有します</li>
+                  <li>収益配分および権利配分については、別途契約書にて明記します</li>
+                  <li>楽曲制作におけるAI関与度を明文化し、AI使用率を応募時に申告するものとします</li>
                   <li>応募者は本企画の規約に同意したものとみなします</li>
                 </ol>
               </div>
@@ -1134,11 +1080,11 @@ function ConceptSlide({ isDark }) {
       <div className="grid grid-cols-2 gap-4">
         <div className="p-4 rounded-xl border border-purple-500/30">
           <div className="font-bold text-purple-300">miya & Humal</div>
-          <div className="text-xs opacity-75">AI楽曲の募集・審査・管理・フィー回収</div>
+          <div className="text-xs opacity-75">AI楽曲の募集・審査・管理／AI音楽エントリーフィーの管理運営</div>
         </div>
         <div className="p-4 rounded-xl border border-pink-500/30">
-          <div className="font-bold text-pink-300">小坂さん</div>
-          <div className="text-xs opacity-75">シンガー募集・審査・運営・CD制作資金負担</div>
+          <div className="font-bold text-pink-300">小坂さん・面谷さん</div>
+          <div className="text-xs opacity-75">シンガー募集・審査／エントリーフィー管理運営</div>
         </div>
       </div>
     </div>
@@ -1160,8 +1106,8 @@ function ProcessSlide({ isDark }) {
           <span className="text-xs text-indigo-300">miya & Humal</span>
         </div>
         <div className="p-3 rounded-xl border border-pink-500/30 flex items-center justify-between">
-          <span><strong>STEP 03</strong>: シンガー オーディション (10名募集 / 1万円)</span>
-          <span className="text-xs text-pink-300">小坂さん</span>
+          <span><strong>STEP 03</strong>: シンガー オーディション (20名募集 / 5,000円)</span>
+          <span className="text-xs text-pink-300">小坂さん・面谷さん</span>
         </div>
         <div className="p-3 rounded-xl border border-blue-500/30 flex items-center justify-between">
           <span><strong>STEP 04</strong>: 審査・最終選考 (書類 → 実技 → 投票)</span>
@@ -1192,9 +1138,9 @@ function GuidelinesSlide({ isDark }) {
         </div>
 
         <div className="p-4 rounded-2xl border border-pink-500/30 space-y-2">
-          <div className="font-bold text-pink-300 text-base">シンガー部門 (小坂さん)</div>
-          <div>• 募集: 10名 (書類通過者)</div>
-          <div>• フィー: 10,000円/名</div>
+          <div className="font-bold text-pink-300 text-base">シンガー部門 (小坂さん・面谷さん)</div>
+          <div>• 募集: 20名</div>
+          <div>• エントリーフィー: 5,000円/名</div>
           <div>• 資格: 年齢・性別・プロアマ不問</div>
           <div>• 選考: 書類 → 実技 → 最終選考</div>
         </div>
@@ -1211,7 +1157,7 @@ function FinancialsSlide({ isDark, creatorBalance, kosakaBalance }) {
 
       <div className="grid grid-cols-2 gap-4 text-sm">
         <div className="p-5 rounded-2xl border border-purple-500/30 space-y-2">
-          <div className="font-bold text-purple-300">miya & Humal サイド</div>
+          <div className="font-bold text-purple-300">AI音楽クリエイターサイド</div>
           <div className="text-emerald-400 font-semibold">+100,000円 (楽曲エントリー)</div>
           <div className="text-rose-400 font-semibold">-10,000円 (楽曲買取)</div>
           <div className="pt-2 border-t border-purple-900/30 font-bold text-lg text-emerald-300">
@@ -1220,11 +1166,11 @@ function FinancialsSlide({ isDark, creatorBalance, kosakaBalance }) {
         </div>
 
         <div className="p-5 rounded-2xl border border-pink-500/30 space-y-2">
-          <div className="font-bold text-pink-300">小坂さん サイド</div>
-          <div className="text-emerald-400 font-semibold">+100,000円 (オーディション)</div>
-          <div className="text-rose-400 font-semibold">-130,000円 (制作・広告・運営)</div>
-          <div className="pt-2 border-t border-pink-900/30 font-bold text-lg text-rose-400">
-            収支 ≒ -30,000円〜
+          <div className="font-bold text-pink-300">シンガーオーディションサイド</div>
+          <div className="text-emerald-400 font-semibold">+100,000円 (20名 × 5,000円)</div>
+          <div className="text-rose-400 font-semibold">-80,000円 (CD制作・レコーディング)</div>
+          <div className="pt-2 border-t border-pink-900/30 font-bold text-lg text-emerald-400">
+            収支 ≒ +20,000円〜
           </div>
         </div>
       </div>
@@ -1253,8 +1199,8 @@ function ScheduleSlide({ isDark }) {
           <span>楽曲審査・買取 (miya, Humal, 小坂さん)</span>
         </div>
         <div className="flex justify-between p-2.5 rounded-lg border border-pink-900/30 bg-pink-950/20">
-          <span>2026年10月〜11月</span>
-          <span>シンガー エントリー受付 (小坂さん)</span>
+          <span>受付期間：2026年8月〜11月</span>
+          <span>シンガーエントリー受付 (小坂さん・面谷さん)</span>
         </div>
         <div className="flex justify-between p-2.5 rounded-lg border border-amber-900/30 font-bold text-amber-300">
           <span>2027年3月 (目標)</span>
@@ -1272,7 +1218,7 @@ function TermsSlide({ isDark }) {
       <h2 className="text-3xl font-extrabold">規約・お問い合わせ</h2>
 
       <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold">
-        ⚠️ エントリーフィー（1,000円） / オーディションフィー（10,000円）は原則返金不可。
+        ⚠️ AI楽曲（1,000円） / シンガーオーディション（5,000円）のエントリーフィーは原則返金不可。
       </div>
 
       <div className="grid grid-cols-2 gap-4 text-xs">
