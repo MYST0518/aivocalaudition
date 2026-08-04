@@ -647,7 +647,7 @@ export default function App() {
                           <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/40 uppercase tracking-wide">
                             🏆 GRAND PRIZE
                           </span>
-                          <span className="text-xs opacity-75">小坂さん 資金負担</span>
+                          <span className="text-xs opacity-75">LAZOS 資金負担</span>
                         </div>
                         <h3 className="text-2xl font-black text-amber-300 flex items-center gap-2">
                           優勝者1名 CDデビュー <Trophy className="w-6 h-6 text-amber-400 animate-bounce" />
@@ -922,7 +922,7 @@ export default function App() {
                         <span className="w-2.5 h-2.5 rounded-full bg-pink-500"></span>
                         シンガーエントリー受付
                       </td>
-                      <td className="py-4 px-4 font-mono">受付期間：2026年8月〜11月</td>
+                      <td className="py-4 px-4 font-mono">受付期間：8月〜11月</td>
                       <td className="py-4 px-4"><span className="px-2.5 py-1 rounded-full bg-pink-900/40 text-pink-300 text-xs border border-pink-500/30">小坂さん・面谷さん</span></td>
                     </tr>
                     <tr className="hover:bg-cyan-500/5 transition-colors">
@@ -1118,7 +1118,7 @@ function ProcessSlide({ isDark }) {
         </div>
         <div className="p-4 rounded-xl border border-amber-500/50 bg-amber-500/10 flex items-center justify-between font-bold text-amber-300">
           <span><strong>STEP 05</strong>: 🏆 優勝者1名 CDデビュー (シングルCD全国リリース)</span>
-          <span className="text-xs">小坂さん 資金負担</span>
+          <span className="text-xs">LAZOS 資金負担</span>
         </div>
       </div>
     </div>
@@ -1202,7 +1202,7 @@ function ScheduleSlide({ isDark }) {
           <span>楽曲審査・買取 (miya, Humal, 小坂さん)</span>
         </div>
         <div className="flex justify-between p-2.5 rounded-lg border border-pink-900/30 bg-pink-950/20">
-          <span>受付期間：2026年8月〜11月</span>
+          <span>受付期間：8月〜11月</span>
           <span>シンガーエントリー受付 (小坂さん・面谷さん)</span>
         </div>
         <div className="flex justify-between p-2.5 rounded-lg border border-amber-900/30 font-bold text-amber-300">
